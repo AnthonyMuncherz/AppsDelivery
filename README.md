@@ -2,16 +2,6 @@
 
 This is a simple web application simulating a food delivery service called "QuickBite Delivery". It allows users to browse products, add them to a cart, checkout, view their order history, and includes a basic admin panel for viewing all orders. The application is built using PHP and uses an SQLite database.
 
-**IMPORTANT SECURITY DISCLAIMER:** This application was developed for educational purposes and contains **intentional security vulnerabilities**. These include, but are not limited to:
-*   **Plain text password storage:** User passwords (including the default admin password) are stored directly in the database without hashing.
-*   **Potential SQL Injection:** Some database queries, particularly in the admin panel's sorting feature, might be vulnerable to SQL injection as they directly include user input in the SQL strings.
-*   **Potential Cross-Site Scripting (XSS):** Although basic `htmlspecialchars` is used in many places, there might be areas where output is not properly sanitized.
-*   **Missing CSRF Protection:** Forms likely lack Cross-Site Request Forgery protection tokens.
-*   **Insecure Session Management:** While basic session regeneration is used on login, overall session handling might lack robustness.
-*   **Insufficient Input Validation:** Input validation is often basic and might not cover all edge cases or malicious inputs.
-
-**DO NOT DEPLOY THIS APPLICATION IN A PRODUCTION ENVIRONMENT OR USE IT WITH REAL USER DATA.**
-
 ## Features
 
 *   **User Management:**
