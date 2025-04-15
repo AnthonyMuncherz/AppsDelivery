@@ -24,6 +24,7 @@ $page_title = "Home - QuickBite Delivery";
             <li><a href="index.php" class="active">Home</a></li>
             <?php if (isLoggedIn()): ?>
                 <li><a href="cart.php">Cart</a></li>
+                <li><a href="my_orders.php">My Orders</a></li>
                 <?php if (isAdmin()): ?>
                     <li><a href="admin.php">Admin Panel</a></li>
                 <?php endif; ?>
