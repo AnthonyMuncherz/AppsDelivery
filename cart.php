@@ -156,44 +156,46 @@ $page_title = "Shopping Cart - QuickBite Delivery";
         <?php else: ?>
             <form action="cart.php" method="post"> <!-- Single form for updates/removals -->
                  <input type="hidden" name="action" id="cart_action" value="update"> <!-- Default action -->
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Image</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($cart_items as $item): ?>
+                <div class="table-responsive"> <!-- Added responsive wrapper -->
+                    <table>
+                        <thead>
                             <tr>
-                                <td><?php echo htmlspecialchars($item['name']); ?></td>
-                                <td>
-                                     <?php if (!empty($item['image']) && file_exists($item['image'])): ?>
-                                         <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" style="width: 50px; height: auto;">
-                                     <?php else: ?>
-                                        <img src="images/default.png" alt="Default Image" style="width: 50px; height: auto;">
-                                     <?php endif; ?>
-                                </td>
-                                <td>$<?php echo number_format($item['price'], 2); ?></td>
-                                <td>
-                                     <!-- Input for quantity update -->
-                                     <input type="hidden" name="cart_item_id" value="<?php echo $item['cart_item_id']; ?>">
-                                     <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="1" style="width: 60px;" onchange="document.getElementById('cart_action').value='update'; this.form.submit();">
-                                </td>
-                                <td>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
-                                <td>
-                                    <!-- Remove button specific to this item -->
-                                     <button type="submit" name="action" value="remove" onclick="document.getElementById('cart_action').value='remove'; document.querySelector('input[name=cart_item_id]').value='<?php echo $item['cart_item_id']; ?>';" class="btn" style="background-color: #ffc107; color: #333;">Remove</button>
-                                     <!-- We need JS to set the correct cart_item_id for removal -->
-                                </td>
+                                <th>Product</th>
+                                <th>Image</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Action</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($cart_items as $item): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($item['name']); ?></td>
+                                    <td>
+                                         <?php if (!empty($item['image']) && file_exists($item['image'])): ?>
+                                             <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" style="width: 50px; height: auto;">
+                                         <?php else: ?>
+                                            <img src="images/default.png" alt="Default Image" style="width: 50px; height: auto;">
+                                         <?php endif; ?>
+                                    </td>
+                                    <td>$<?php echo number_format($item['price'], 2); ?></td>
+                                    <td>
+                                         <!-- Input for quantity update -->
+                                         <input type="hidden" name="cart_item_id" value="<?php echo $item['cart_item_id']; ?>">
+                                         <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="1" style="width: 60px;" onchange="document.getElementById('cart_action').value='update'; this.form.submit();">
+                                    </td>
+                                    <td>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
+                                    <td>
+                                        <!-- Remove button specific to this item -->
+                                         <button type="submit" name="action" value="remove" onclick="document.getElementById('cart_action').value='remove'; document.querySelector('input[name=cart_item_id]').value='<?php echo $item['cart_item_id']; ?>';" class="btn" style="background-color: #ffc107; color: #333;">Remove</button>
+                                         <!-- We need JS to set the correct cart_item_id for removal -->
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div> <!-- Close responsive wrapper -->
              </form> <!-- End Form -->
 
             <div class="cart-total">

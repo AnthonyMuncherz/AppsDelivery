@@ -130,32 +130,34 @@ $page_title = "Checkout - QuickBite Delivery";
             <a href="index.php" class="btn">Back to Home</a>
         <?php else: ?>
             <h3>Order Summary</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($cart_items as $item): ?>
+            <div class="table-responsive">
+                <table>
+                    <thead>
                         <tr>
-                            <td><?php echo htmlspecialchars($item['name']); ?></td>
-                            <td><?php echo $item['quantity']; ?></td>
-                            <td>$<?php echo number_format($item['price'], 2); ?></td>
-                            <td>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" style="text-align: right;"><strong>Grand Total:</strong></td>
-                        <td><strong>$<?php echo number_format($total_price, 2); ?></strong></td>
-                    </tr>
-                </tfoot>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($cart_items as $item): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($item['name']); ?></td>
+                                <td><?php echo $item['quantity']; ?></td>
+                                <td>$<?php echo number_format($item['price'], 2); ?></td>
+                                <td>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" style="text-align: right;"><strong>Grand Total:</strong></td>
+                            <td><strong>$<?php echo number_format($total_price, 2); ?></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
 
             <h3>Simulated Payment</h3>
             <p>Please enter dummy payment details to complete the order.</p>

@@ -44,21 +44,25 @@ $page_title = "Home - QuickBite Delivery";
 
         <div class="product-grid">
             <?php foreach ($products as $product): ?>
-                <div class="product-card">
+                <div class="product-card fade-in">
                     <?php if (!empty($product['image']) && file_exists($product['image'])): ?>
                          <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                     <?php else: ?>
                         <img src="images/default.png" alt="Default Image"> <!-- Provide a default image -->
                     <?php endif; ?>
-                    <h3><?php echo htmlspecialchars($product['name']); ?></h3>
-                    <p><?php echo htmlspecialchars($product['description']); ?></p>
-                    <p class="product-price">$<?php echo number_format($product['price'], 2); ?></p>
-                    <form action="cart.php" method="post">
-                        <input type="hidden" name="action" value="add">
-                        <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                        <input type="number" name="quantity" value="1" min="1" style="width: 60px; display: inline-block; margin-right: 5px;">
-                        <button type="submit" class="btn">Add to Cart</button>
-                    </form>
+                    <div class="product-info">
+                        <div>
+                            <h3><?php echo htmlspecialchars($product['name']); ?></h3>
+                            <p><?php echo htmlspecialchars($product['description']); ?></p>
+                            <p class="product-price">$<?php echo number_format($product['price'], 2); ?></p>
+                        </div>
+                        <form action="cart.php" method="post">
+                            <input type="hidden" name="action" value="add">
+                            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                            <input type="number" name="quantity" value="1" min="1" style="width: 60px; display: inline-block; margin-right: 5px;">
+                            <button type="submit" class="btn">Add to Cart</button>
+                        </form>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -69,5 +73,21 @@ $page_title = "Home - QuickBite Delivery";
         <p>&copy; <?php echo date('Y'); ?> QuickBite Delivery. All rights reserved.</p>
          <p style="font-size: 0.8em; color: #aaa;">Disclaimer: This website is for educational purposes only and contains intentional security vulnerabilities.</p>
     </footer>
+
+    <!-- JavaScript for fade-in animation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in');
+            // Trigger fade-in after a short delay to ensure rendering
+            setTimeout(() => {
+                 elements.forEach((el, index) => {
+                    // Optional: Add a slight delay for each subsequent card
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, index * 100); // Stagger the animation slightly
+                });
+            }, 100);
+        });
+    </script>
 </body>
 </html> 

@@ -101,53 +101,55 @@ $page_title = "Admin Panel - QuickBite Delivery";
             <?php if (empty($orders) && !$error_message): ?>
                 <p>No orders found.</p>
             <?php elseif (!empty($orders)): ?>
-                <table>
-                    <thead>
-                        <tr>
-                             <!-- Vulnerable Sorting Links -->
-                            <th><a href="admin.php?sort=id&order=<?php echo ($sort_column == 'id' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">Order ID</a></th>
-                            <th><a href="admin.php?sort=username&order=<?php echo ($sort_column == 'username' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">User</a></th>
-                            <th><a href="admin.php?sort=total_amount&order=<?php echo ($sort_column == 'total_amount' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">Total</a></th>
-                            <th><a href="admin.php?sort=status&order=<?php echo ($sort_column == 'status' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">Status</a></th>
-                            <th><a href="admin.php?sort=order_date&order=<?php echo ($sort_column == 'order_date' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">Date</a></th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($orders as $order): ?>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
                             <tr>
-                                <td><?php echo htmlspecialchars($order['id']); ?></td>
-                                <td><?php echo htmlspecialchars($order['username']); ?> (ID: <?php echo $order['user_id']; ?>)</td>
-                                <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
-                                <td>
-                                     <?php echo htmlspecialchars($order['status']); ?>
-                                     <!-- Basic status update form (needs implementation and CSRF protection) -->
-                                     <!-- <form action="admin.php" method="post" style="display:inline;">
-                                         <input type="hidden" name="action" value="update_status">
-                                         <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
-                                         <select name="new_status" onchange="this.form.submit()">
-                                             <option value="pending" <?php if($order['status'] == 'pending') echo 'selected'; ?>>Pending</option>
-                                             <option value="processing" <?php if($order['status'] == 'processing') echo 'selected'; ?>>Processing</option>
-                                             <option value="shipped" <?php if($order['status'] == 'shipped') echo 'selected'; ?>>Shipped</option>
-                                             <option value="delivered" <?php if($order['status'] == 'delivered') echo 'selected'; ?>>Delivered</option>
-                                             <option value="cancelled" <?php if($order['status'] == 'cancelled') echo 'selected'; ?>>Cancelled</option>
-                                         </select>
-                                     </form> -->
-                                </td>
-                                <td><?php echo htmlspecialchars($order['order_date']); ?></td>
-                                <td>
-                                    <a href="admin_order_details.php?order_id=<?php echo $order['id']; ?>" class="btn" style="background-color: #17a2b8;">Details</a>
-                                     <!-- Delete order button (needs implementation, CSRF, authorization) -->
-                                    <!-- <form action="admin.php" method="post" style="display:inline;">
-                                         <input type="hidden" name="action" value="delete_order">
-                                         <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
-                                         <button type="submit" class="btn" style="background-color: #dc3545;" onclick="return confirm('Are you sure?');">Delete</button>
-                                     </form> -->
-                                </td>
+                                 <!-- Vulnerable Sorting Links -->
+                                <th><a href="admin.php?sort=id&order=<?php echo ($sort_column == 'id' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">Order ID</a></th>
+                                <th><a href="admin.php?sort=username&order=<?php echo ($sort_column == 'username' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">User</a></th>
+                                <th><a href="admin.php?sort=total_amount&order=<?php echo ($sort_column == 'total_amount' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">Total</a></th>
+                                <th><a href="admin.php?sort=status&order=<?php echo ($sort_column == 'status' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">Status</a></th>
+                                <th><a href="admin.php?sort=order_date&order=<?php echo ($sort_column == 'order_date' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">Date</a></th>
+                                <th>Actions</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($orders as $order): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($order['id']); ?></td>
+                                    <td><?php echo htmlspecialchars($order['username']); ?> (ID: <?php echo $order['user_id']; ?>)</td>
+                                    <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
+                                    <td>
+                                         <?php echo htmlspecialchars($order['status']); ?>
+                                         <!-- Basic status update form (needs implementation and CSRF protection) -->
+                                         <!-- <form action="admin.php" method="post" style="display:inline;">
+                                             <input type="hidden" name="action" value="update_status">
+                                             <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                                             <select name="new_status" onchange="this.form.submit()">
+                                                 <option value="pending" <?php if($order['status'] == 'pending') echo 'selected'; ?>>Pending</option>
+                                                 <option value="processing" <?php if($order['status'] == 'processing') echo 'selected'; ?>>Processing</option>
+                                                 <option value="shipped" <?php if($order['status'] == 'shipped') echo 'selected'; ?>>Shipped</option>
+                                                 <option value="delivered" <?php if($order['status'] == 'delivered') echo 'selected'; ?>>Delivered</option>
+                                                 <option value="cancelled" <?php if($order['status'] == 'cancelled') echo 'selected'; ?>>Cancelled</option>
+                                             </select>
+                                         </form> -->
+                                    </td>
+                                    <td><?php echo htmlspecialchars($order['order_date']); ?></td>
+                                    <td>
+                                        <a href="admin_order_details.php?order_id=<?php echo $order['id']; ?>" class="btn" style="background-color: #17a2b8;">Details</a>
+                                         <!-- Delete order button (needs implementation, CSRF, authorization) -->
+                                        <!-- <form action="admin.php" method="post" style="display:inline;">
+                                             <input type="hidden" name="action" value="delete_order">
+                                             <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
+                                             <button type="submit" class="btn" style="background-color: #dc3545;" onclick="return confirm('Are you sure?');">Delete</button>
+                                         </form> -->
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php endif; ?>
         </section>
 

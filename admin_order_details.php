@@ -87,26 +87,28 @@ $page_title = "Order Details (#" . htmlspecialchars($order_id) . ") - Admin Pane
             <?php if (empty($order_items)): ?>
                 <p>No items found for this order (this might indicate an error).</p>
             <?php else: ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Price (at time of order)</th>
-                            <th>Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($order_items as $item): ?>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
                             <tr>
-                                <td><?php echo htmlspecialchars($item['product_name']); ?> (ID: <?php echo $item['product_id']; ?>)</td>
-                                <td><?php echo htmlspecialchars($item['quantity']); ?></td>
-                                <td>$<?php echo number_format($item['price'], 2); ?></td>
-                                <td>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Price (at time of order)</th>
+                                <th>Subtotal</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($order_items as $item): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($item['product_name']); ?> (ID: <?php echo $item['product_id']; ?>)</td>
+                                    <td><?php echo htmlspecialchars($item['quantity']); ?></td>
+                                    <td>$<?php echo number_format($item['price'], 2); ?></td>
+                                    <td>$<?php echo number_format($item['price'] * $item['quantity'], 2); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php endif; ?>
          <?php elseif(!$error_message): ?>
              <p>Order not found.</p>
