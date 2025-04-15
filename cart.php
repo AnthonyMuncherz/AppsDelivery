@@ -22,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $quantity = 1;
     }
 
-    // Validate product_id (INTENTIONALLY VULNERABLE - could allow SQL injection if not using prepared statements)
-    // A better check would be is_numeric() and ensuring it exists in products table
+
     if ($product_id === null) {
         $error_message = "Invalid product specified.";
     }
@@ -65,8 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     } elseif ($action === 'remove') {
         $cart_item_id = $_POST['cart_item_id'] ?? null; // Get cart item ID for update/remove
         if ($cart_item_id && ctype_digit((string)$cart_item_id)) {
-            // INTENTIONALLY VULNERABLE: No check if item actually exists before deleting
-            // Also, user_id check prevents deleting others' items, but logic could be flawed elsewhere
+
             $delete_stmt = $db->prepare("DELETE FROM cart_items WHERE id = ? AND user_id = ?");
             $delete_stmt->execute([$cart_item_id, $user_id]);
             $success_message = "Item removed from cart.";
@@ -212,7 +210,7 @@ $page_title = "Shopping Cart - QuickBite Delivery";
 
     <footer>
         <p>&copy; <?php echo date('Y'); ?> QuickBite Delivery. All rights reserved.</p>
-         <p style="font-size: 0.8em; color: #aaa;">Disclaimer: This website is for educational purposes only and contains intentional security vulnerabilities.</p>
+         <p style="font-size: 0.8em; color: #aaa;"></p>
     </footer>
 
 </body>

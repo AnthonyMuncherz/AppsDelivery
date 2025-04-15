@@ -1,7 +1,6 @@
 <?php
 require_once 'includes/db.php';
 
-// Fetch products from the database
 $stmt = $db->query("SELECT * FROM products");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -49,13 +48,13 @@ $page_title = "Home - QuickBite Delivery";
                     <?php if (!empty($product['image']) && file_exists($product['image'])): ?>
                          <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                     <?php else: ?>
-                        <img src="images/default.png" alt="Default Image"> <!-- Provide a default image -->
+                        <img src="images/default.png" alt="Default Image">
                     <?php endif; ?>
                     <div class="product-info">
                         <div>
                             <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                             <p><?php echo htmlspecialchars($product['description']); ?></p>
-                            <p class="product-price">$<?php echo number_format($product['price'], 2); ?></p>
+                            <p class="product-price">RM<?php echo number_format($product['price'], 2); ?></p>
                         </div>
                         <form action="cart.php" method="post">
                             <input type="hidden" name="action" value="add">
@@ -72,20 +71,17 @@ $page_title = "Home - QuickBite Delivery";
 
     <footer>
         <p>&copy; <?php echo date('Y'); ?> QuickBite Delivery. All rights reserved.</p>
-         <p style="font-size: 0.8em; color: #aaa;">Disclaimer: This website is for educational purposes only and contains intentional security vulnerabilities.</p>
+         <p style="font-size: 0.8em; color: #aaa;"></p>
     </footer>
 
-    <!-- JavaScript for fade-in animation -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const elements = document.querySelectorAll('.fade-in');
-            // Trigger fade-in after a short delay to ensure rendering
             setTimeout(() => {
                  elements.forEach((el, index) => {
-                    // Optional: Add a slight delay for each subsequent card
                     setTimeout(() => {
                         el.classList.add('visible');
-                    }, index * 100); // Stagger the animation slightly
+                    }, index * 100);
                 });
             }, 100);
         });

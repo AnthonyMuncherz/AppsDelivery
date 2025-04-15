@@ -10,8 +10,7 @@ if (!isAdmin()) {
 $error_message = '';
 $order_id = $_GET['order_id'] ?? null;
 
-// INTENTIONALLY VULNERABLE: Using order_id directly from GET without strong validation
-// A better approach would be filter_var($order_id, FILTER_VALIDATE_INT)
+
 if (!$order_id || !ctype_digit((string)$order_id)) {
     header("Location: admin.php?message=Invalid+Order+ID");
     exit();
@@ -118,7 +117,7 @@ $page_title = "Order Details (#" . htmlspecialchars($order_id) . ") - Admin Pane
 
     <footer>
         <p>&copy; <?php echo date('Y'); ?> QuickBite Delivery. All rights reserved.</p>
-         <p style="font-size: 0.8em; color: #aaa;">Disclaimer: This website is for educational purposes only and contains intentional security vulnerabilities.</p>
+         <p style="font-size: 0.8em; color: #aaa;"></p>
     </footer>
 </body>
 </html> 

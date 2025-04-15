@@ -13,10 +13,7 @@ $error_message = '';
 $success_message = '';
 
 // --- Handle Admin Actions --- 
-// Potential areas for vulnerabilities: SQL Injection, Missing Authorization, CSRF
 
-// Example: View Orders
-// INTENTIONALLY VULNERABLE: Directly embedding user-provided sorting parameters without proper validation/sanitization
 $sort_column = $_GET['sort'] ?? 'order_date'; // Example: Allow sorting via GET param
 $sort_order = $_GET['order'] ?? 'DESC';
 
@@ -30,9 +27,7 @@ if (!in_array(strtoupper($sort_order), $allowed_sort_orders)) {
     $sort_order = 'DESC'; // Default back
 }
 
-// Build the SQL query string - Directly embedding variables is dangerous!
-// $order_sql = "SELECT o.*, u.username FROM orders o JOIN users u ON o.user_id = u.id ORDER BY " . $sort_column . " " . $sort_order;
-// Using prepare for the main query but potentially vulnerable sorting
+
 $order_sql = "SELECT o.id, o.user_id, o.total_amount, o.status, o.order_date, u.username
              FROM orders o
              JOIN users u ON o.user_id = u.id
@@ -48,15 +43,7 @@ try {
 }
 
 
-// TODO: Add functionality for managing products (Add/Edit/Delete)
-// This would be another place to introduce vulnerabilities like:
-// - SQL Injection in product forms
-// - Cross-Site Scripting (XSS) in product names/descriptions if not sanitized on display
-// - Insecure File Uploads for product images
-// - Missing CSRF protection on forms
 
-// TODO: Add functionality for managing users (View/Edit/Delete)
-// Vulnerabilities: Exposing sensitive data, insecure password handling, etc.
 
 $page_title = "Admin Panel - QuickBite Delivery";
 ?>
@@ -105,7 +92,6 @@ $page_title = "Admin Panel - QuickBite Delivery";
                     <table>
                         <thead>
                             <tr>
-                                 <!-- Vulnerable Sorting Links -->
                                 <th><a href="admin.php?sort=id&order=<?php echo ($sort_column == 'id' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">Order ID</a></th>
                                 <th><a href="admin.php?sort=username&order=<?php echo ($sort_column == 'username' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">User</a></th>
                                 <th><a href="admin.php?sort=total_amount&order=<?php echo ($sort_column == 'total_amount' && $sort_order == 'ASC') ? 'DESC' : 'ASC'; ?>">Total</a></th>
@@ -174,7 +160,7 @@ $page_title = "Admin Panel - QuickBite Delivery";
 
     <footer>
         <p>&copy; <?php echo date('Y'); ?> QuickBite Delivery. All rights reserved.</p>
-         <p style="font-size: 0.8em; color: #aaa;">Disclaimer: This website is for educational purposes only and contains intentional security vulnerabilities.</p>
+         <p style="font-size: 0.8em; color: #aaa;"></p>
     </footer>
 </body>
 </html> 

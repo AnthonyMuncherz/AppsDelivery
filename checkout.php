@@ -36,9 +36,7 @@ foreach ($cart_items as $item) {
 // Handle Order Placement (Simulated Payment)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'place_order') {
 
-    // INTENTIONALLY VULNERABLE: Trusting the calculated total_price without re-verification
-    // Could be manipulated if client-side calculation was used or if cart items were modified
-    // between page load and submission.
+
 
     // Basic validation for dummy payment details (not actually used)
     $card_number = $_POST['card_number'] ?? '';
@@ -63,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                  $product_price_stmt = $db->prepare("SELECT price FROM products WHERE id = ?");
                  $product_price_stmt->execute([$item['product_id']]);
                  $current_price = $product_price_stmt->fetchColumn();
-                 // Still vulnerable if price changes between cart calculation and this point?
+
                  // Or if the re-fetched price is wrong somehow.
                  if ($current_price === false) throw new Exception("Product price not found during checkout.");
 
@@ -184,7 +182,7 @@ $page_title = "Checkout - QuickBite Delivery";
 
     <footer>
         <p>&copy; <?php echo date('Y'); ?> QuickBite Delivery. All rights reserved.</p>
-         <p style="font-size: 0.8em; color: #aaa;">Disclaimer: This website is for educational purposes only and contains intentional security vulnerabilities.</p>
+         <p style="font-size: 0.8em; color: #aaa;"></p>
     </footer>
 </body>
 </html> 

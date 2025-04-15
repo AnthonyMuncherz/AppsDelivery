@@ -16,9 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($username) || empty($password)) {
         $error_message = "Username and password are required.";
     } else {
-        // Fetch user by username - directly comparing plain text password (VERY INSECURE)
-        // This query is slightly better protected against SQLi due to prepare,
-        // but the password comparison itself is the vulnerability.
+
         $stmt = $db->prepare("SELECT id, username, password, role FROM users WHERE username = ?");
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -86,7 +84,7 @@ $page_title = "Login - QuickBite Delivery";
 
     <footer>
         <p>&copy; <?php echo date('Y'); ?> QuickBite Delivery. All rights reserved.</p>
-         <p style="font-size: 0.8em; color: #aaa;">Disclaimer: This website is for educational purposes only and contains intentional security vulnerabilities.</p>
+         <p style="font-size: 0.8em; color: #aaa;"></p>
     </footer>
 </body>
 </html> 

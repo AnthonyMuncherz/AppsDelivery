@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error_message = "Username already taken.";
         } else {
             // Insert new user with plain text password (VERY INSECURE)
-            // This is a major vulnerability for demonstration
+
             $insert_stmt = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
             try {
                 $insert_stmt->execute([$username, $password]);
@@ -90,7 +90,7 @@ $page_title = "Register - QuickBite Delivery";
 
     <footer>
         <p>&copy; <?php echo date('Y'); ?> QuickBite Delivery. All rights reserved.</p>
-         <p style="font-size: 0.8em; color: #aaa;">Disclaimer: This website is for educational purposes only and contains intentional security vulnerabilities.</p>
+         <p style="font-size: 0.8em; color: #aaa;"></p>
     </footer>
 </body>
 </html> 
